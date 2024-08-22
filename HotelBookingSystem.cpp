@@ -11,33 +11,36 @@ protected:
 public:
     void take_info()
     {
-        cout << "________________________________________________________\n";
+        cout << "____________________________\n";
         cout << "WELCOME, PLEASE FILL THE FORM FOR BOOKING THE ROOM\n";
         cout << "ENTER THE LAST 4-DIGITS OF YOUR AADHAAR CARD: ";
         while (!(cin >> id))
         {
-            cout << "INVALID INPUT. PLEASE ENTER A VALID INTEGER: ";
+            cout << "Invalid input. Please enter a valid integer: ";
             cin.clear();
             cin.ignore(10000, '\n'); // ignore up to 10000 characters or until newline
         }
         cout << "ENTER THE NUMBER OF DAYS YOU WANT YOUR STAY: ";
-        while (!(cin >> days))
+        while (!(cin >> days) || days <= 0)
         {
-            cout << "INVALID INPUT. PLEASE ENTER A VALID INTEGER: ";
-            cin.clear();
-            cin.ignore(10000, '\n'); // ignore up to 10000 characters or until newline
-        }
-
-        if (days <= 0)
-        {
-            cout << "Number of days must be positive. Please re-enter: ";
-            cin >> days;
+            if (cin.fail())
+            {
+                cout << "Invalid input. Please enter a valid integer: ";
+                cin.clear();
+                cin.ignore(10000, '\n'); // ignore up to 10000 characters or until newline
+            }
+            else if (days <= 0)
+            {
+                cout << "Number of days must be positive. Please re-enter: ";
+                cin.clear();
+                cin.ignore(10000, '\n'); // ignore up to 10000 characters or until newline
+            }
         }
     }
 
     void show_booking_info()
     {
-        cout << "________________________________________________________\n";
+        cout << "____________________________\n";
         cout << "BOOKING INFORMATION\n";
         cout << "CUSTOMER ID: " << id << endl;
 
@@ -63,24 +66,33 @@ public:
     {
         Booking::take_info(); // Call the base class method
 
-        cout << "________________________________________________________\n";
+        cout << "____________________________\n";
         cout << "NOW FILL YOUR PERSONAL DETAILS\n";
         cout << "ENTER YOUR FIRST NAME: ";
         cin >> name;
         cout << "ENTER YOUR LAST NAME: ";
         cin >> surname;
         cout << "ENTER YOUR AGE: ";
-        while (!(cin >> age))
+        while (!(cin >> age) || age <= 0)
         {
-            cout << "INVALID INPUT. PLEASE ENTER A VALID INTEGER:  ";
-            cin.clear();
-            cin.ignore(10000, '\n'); // ignore up to 10000 characters or until newline
+            if (cin.fail())
+            {
+                cout << "Invalid input. Please enter a valid integer: ";
+                cin.clear();
+                cin.ignore(10000, '\n'); // ignore up to 10000 characters or until newline
+            }
+            else if (age <= 0)
+            {
+                cout << "Age must be positive. Please re-enter: ";
+                cin.clear();
+                cin.ignore(10000, '\n'); // ignore up to 10000 characters or until newline
+            }
         }
     }
 
     void show_guest_info()
     {
-        cout << "________________________________________________________\n";
+        cout << "____________________________\n";
         cout << "GUEST INFORMATION\n";
         cout << "NAME: " << name << " " << surname << endl;
         cout << "AGE: " << age << " YEARS\n";
@@ -98,22 +110,30 @@ public:
     {
         Guest::take_info(); // Call the base class method
 
-        cout << "________________________________________________________\n";
+        cout << "____________________________\n";
         cout << "NOW FILL YOUR ROOM TYPE\n";
         cout << "ROOM TYPE:\n1) AC ROOM (PRICE: 600 Rs/DAY)\n2) NON-AC ROOM (PRICE: 400 Rs/DAY)\n";
         cout << "SELECT 1 FOR AC ROOM AND 2 FOR NON-AC ROOM: ";
-        cin >> room_type;
-
-        if (room_type != 1 && room_type != 2)
+        while (!(cin >> room_type) || (room_type != 1 && room_type != 2))
         {
-            cout << "INVALID SELECTION. PLEASE CHOOSE 1 OR 2: ";
-            cin >> room_type;
+            if (cin.fail())
+            {
+                cout << "Invalid input. Please enter a valid integer: ";
+                cin.clear();
+                cin.ignore(10000, '\n'); // ignore up to 10000 characters or until newline
+            }
+            else
+            {
+                cout << "Invalid selection. Please choose 1 or 2: ";
+                cin.clear();
+                cin.ignore(10000, '\n'); // ignore up to 10000 characters or until newline
+            }
         }
     }
 
     void show_room_info()
     {
-        cout << "________________________________________________________\n";
+        cout << "____________________________\n";
         cout << "ROOM INFORMATION\n";
         if (room_type == 1)
         {
@@ -137,21 +157,29 @@ public:
     {
         Room::take_info(); // Call the base class method
 
-        cout << "________________________________________________________\n";
+        cout << "____________________________\n";
         cout << "NOW FILL YOUR PAYMENT DETAILS\n";
         cout << "CHOOSE MODE OF PAYMENT:\n1) CASH\n2) ONLINE PAYMENT\n";
-        cin >> payment_mode;
-
-        if (payment_mode != 1 && payment_mode != 2)
+        while (!(cin >> payment_mode) || (payment_mode != 1 && payment_mode != 2))
         {
-            cout << "INVALID SELECTION. PLEASE CHOOSE 1 OR 2:  ";
-            cin >> payment_mode;
+            if (cin.fail())
+            {
+                cout << "Invalid input. Please enter a valid integer: ";
+                cin.clear();
+                cin.ignore(10000, '\n'); // ignore up to 10000 characters or until newline
+            }
+            else
+            {
+                cout << "Invalid selection. Please choose 1 or 2: ";
+                cin.clear();
+                cin.ignore(10000, '\n'); // ignore up to 10000 characters or until newline
+            }
         }
     }
 
     void show_payment_info()
     {
-        cout << "________________________________________________________\n";
+        cout << "____________________________\n";
         cout << "PAYMENT INFORMATION\n";
 
         if (payment_mode == 1)
